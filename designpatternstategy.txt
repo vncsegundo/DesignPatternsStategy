@@ -1,0 +1,108 @@
+class Ave
+{
+   public virtual void Voar()
+    {
+
+    }
+}
+
+class Pato : Ave
+{
+    public override void Voar()
+    {
+    Console.WriteLine("voando como um pato!");
+    }
+}
+
+class Aguia : Ave
+{
+    public override void Voar()
+    {
+    Console.WriteLine("voando como uma aguia!");
+    }
+}
+
+class Program
+{
+    Ave ave = new Pato();
+    ave.Voar();
+    Ave ave = new Aguia();
+    ave.Voar();
+}
+
+interface IMamifero
+{
+void TomarLeite();
+}
+
+interface INadador
+{
+void Nadar();
+}
+
+class Ornitorrinco : IMamifero, INadador
+{
+public void TomarLeite()
+{
+
+}
+
+public void Nadar()
+{
+
+}
+}
+
+
+
+interface IOperacaoMat {
+
+int Oper (int a, int b);
+    
+}
+
+public class Adicao : IOperacaoMat
+{
+public int Oper (int a, int b)
+{
+return a+b;
+}
+}
+
+public class Multiplicacao : IOperacaoMat
+{
+public int Oper (int a, int b)
+{
+return a*b;
+}
+}
+
+public class Subtracao : IOperacaoMat
+{
+public int Oper (int a, int b)
+{
+return a-b;
+}
+}
+
+public class Calculadora
+{
+public IOperacaoMat Calcula {get; private set;}
+public int Operacao (int a, int b)
+{
+return Calcula.Oper(a, b);
+}
+
+public Calculadora(IOperacaoMat op)
+{
+Calcula = op;
+}
+}
+
+class Program
+{
+IOperacaoMat estrategia = new Subtracao();
+Calculadora calc = new Calculadora(estrategia);
+
+Console.WriteLine($" Resultado = {calc.Operacao(3,5)}");
+}
